@@ -1,0 +1,60 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'maven'
+apply plugin: 'maven-publish'
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+            groupId 'com.harshil'
+            artifactId 'user-dao-plugin'
+        }
+    }
+
+    repositories {
+        maven {
+            url "s3://maven-repo-0152156d-cfca-4bd6-8f27-2c6425102251.s3.ap-south-1.amazonaws.com/${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}"
+            credentials(AwsCredentials) {
+                accessKey AWS_ACCESS_KEY
+                secretKey AWS_SECRET_KEY
+            }
+        }
+    }
+}
+
+version = artifactVersion
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+    compile('org.springframework.boot:spring-boot-starter-jdbc')
+    runtime('org.postgresql:postgresql')
+    compileOnly('org.projectlombok:lombok')
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+task buildnumberplusone {
+    Properties properties = new Properties()
+    File propertiesFile = new File('gradle.properties')
+    properties.load(propertiesFile.newDataInputStream())
+    String version = properties.getProperty('artifactVersion')
+
+}
