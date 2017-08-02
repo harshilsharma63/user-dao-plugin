@@ -10,6 +10,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.researchgate.release' version '2.4.0'
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -36,7 +40,7 @@ publishing {
     }
 }
 
-version = artifactVersion
+version = '6.1.1'
 sourceCompatibility = 1.8
 
 repositories {
@@ -49,12 +53,4 @@ dependencies {
     runtime('org.postgresql:postgresql')
     compileOnly('org.projectlombok:lombok')
     testCompile('org.springframework.boot:spring-boot-starter-test')
-}
-
-task buildnumberplusone {
-    Properties properties = new Properties()
-    File propertiesFile = new File('gradle.properties')
-    properties.load(propertiesFile.newDataInputStream())
-    String version = properties.getProperty('artifactVersion')
-
 }
