@@ -15,7 +15,7 @@ plugins {
 }
 
 release {
-    failOnCommitNeeded = true
+    failOnCommitNeeded = false
 }
 
 apply plugin: 'java'
