@@ -23,7 +23,7 @@ beforeReleaseBuild.dependsOn("publish")
 preTagCommit.onlyIf { !project.version.endsWith('-SNAPSHOT') }
 createReleaseTag.onlyIf { !project.version.endsWith('-SNAPSHOT') }
 updateVersion.onlyIf { !project.version.endsWith('-SNAPSHOT') }
-commitNewVersion.onlyIf { !project.version.endsWith('-SNAPSHOT') }
+//commitNewVersion.onlyIf { !project.version.endsWith('-SNAPSHOT') }
 
 
 apply plugin: 'java'
