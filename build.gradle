@@ -38,7 +38,8 @@ publishing {
 
     repositories {
         maven {
-            url "s3://maven-repo-0152156d-cfca-4bd6-8f27-2c6425102251.s3.ap-south-1.amazonaws.com/${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}"
+//            url "s3://maven-repo-0152156d-cfca-4bd6-8f27-2c6425102251.s3.ap-south-1.amazonaws.com/${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}"
+            url "s3://unified-maven-repo-d7474c9a-77b2-4d1d-a5db-a1e9a139261b/"
             credentials(AwsCredentials) {
                 accessKey AWS_ACCESS_KEY
                 secretKey AWS_SECRET_KEY
