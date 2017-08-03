@@ -18,7 +18,7 @@ release {
     failOnCommitNeeded = false
 }
 
-//afterReleaseBuild.dependsOn("publish")
+beforeReleaseBuild.dependsOn("publish")
 
 
 apply plugin: 'java'
