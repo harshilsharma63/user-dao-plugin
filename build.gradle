@@ -20,6 +20,11 @@ release {
 
 beforeReleaseBuild.dependsOn("publish")
 
+preTagCommit.onlyIf { !project.version.endsWith('-SNAPSHOT') }
+createReleaseTag.onlyIf { !project.version.endsWith('-SNAPSHOT') }
+updateVersion.onlyIf { !project.version.endsWith('-SNAPSHOT') }
+commitNewVersion.onlyIf { !project.version.endsWith('-SNAPSHOT') }
+
 
 apply plugin: 'java'
 apply plugin: 'eclipse'
@@ -38,8 +43,7 @@ publishing {
 
     repositories {
         maven {
-//            url "s3://maven-repo-0152156d-cfca-4bd6-8f27-2c6425102251.s3.ap-south-1.amazonaws.com/${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}"
-            url "s3://unified-maven-repo-d7474c9a-77b2-4d1d-a5db-a1e9a139261b/"
+            url "s3://maven-repo-0152156d-cfca-4bd6-8f27-2c6425102251.s3.ap-south-1.amazonaws.com/${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}"
             credentials(AwsCredentials) {
                 accessKey AWS_ACCESS_KEY
                 secretKey AWS_SECRET_KEY
